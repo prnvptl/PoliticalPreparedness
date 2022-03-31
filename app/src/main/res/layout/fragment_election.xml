@@ -3,16 +3,82 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Add node to connect Election ViewModel -->
+    <data>
+
+        <variable
+            name="electionViewModel"
+            type="com.example.android.politicalpreparedness.election.ElectionsViewModel" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
-        <!-- TODO: Add Upcoming Election Recycler and Header -->
+        <LinearLayout
+            android:id="@+id/upcoming_elections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingTop="@dimen/standard_padding"
+            android:paddingEnd="@dimen/standard_padding"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-        <!-- TODO: Add Saved Election Recycler and Header -->
+            <TextView
+                android:id="@+id/elections_text_view"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/upcoming_elections"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="15dp"
+                tools:layout_editor_absoluteY="14dp" />
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/elections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/medium_upper_over_padding"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/half_screen_guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.50" />
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingTop="@dimen/standard_padding"
+            android:paddingEnd="@dimen/standard_padding"
+            app:layout_constraintTop_toBottomOf="@id/half_screen_guideline">
+
+            <TextView
+                android:id="@+id/saved_selections_text_view"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/saved_elections"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="15dp"
+                tools:layout_editor_absoluteY="14dp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/saved_elections"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/medium_upper_over_padding" />
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
