@@ -15,36 +15,33 @@
         android:layout_height="match_parent"
         tools:context="com.example.android.politicalpreparedness.MainActivity">
 
-        <LinearLayout
-            android:id="@+id/upcoming_elections"
+        <TextView
+            android:id="@+id/elections_text_view"
+            style="@style/TextAppearance.AppCompat.Headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
+            android:layout_marginBottom="@dimen/standard_over_padding"
             android:paddingStart="@dimen/standard_padding"
             android:paddingTop="@dimen/standard_padding"
             android:paddingEnd="@dimen/standard_padding"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@string/upcoming_elections"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="14dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/elections"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingTop="@dimen/mini_half_padding"
+            android:paddingEnd="@dimen/mini_half_padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintBottom_toTopOf="@+id/half_screen_guideline"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/elections_text_view"
-                style="@style/TextAppearance.AppCompat.Headline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/upcoming_elections"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="15dp"
-                tools:layout_editor_absoluteY="14dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/elections"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/medium_upper_over_padding"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-        </LinearLayout>
+            app:layout_constraintTop_toBottomOf="@+id/elections_text_view" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/half_screen_guideline"
@@ -53,32 +50,28 @@
             android:orientation="horizontal"
             app:layout_constraintGuide_percent="0.50" />
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
+        <TextView
+            android:id="@+id/saved_selections_text_view"
+            style="@style/TextAppearance.AppCompat.Headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:paddingStart="@dimen/standard_padding"
             android:paddingTop="@dimen/standard_padding"
             android:paddingEnd="@dimen/standard_padding"
-            app:layout_constraintTop_toBottomOf="@id/half_screen_guideline">
+            android:text="@string/saved_elections"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/half_screen_guideline"
+            tools:layout_editor_absoluteX="15dp"
+            tools:layout_editor_absoluteY="14dp" />
 
-            <TextView
-                android:id="@+id/saved_selections_text_view"
-                style="@style/TextAppearance.AppCompat.Headline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/saved_elections"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold"
-                tools:layout_editor_absoluteX="15dp"
-                tools:layout_editor_absoluteY="14dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/saved_elections"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="@dimen/medium_upper_over_padding" />
-        </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/saved_elections"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/standard_padding"
+            android:paddingTop="@dimen/mini_half_padding"
+            android:paddingEnd="@dimen/mini_half_padding"
+            app:layout_constraintTop_toBottomOf="@id/saved_selections_text_view" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

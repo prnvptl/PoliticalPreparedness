@@ -5,17 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ElectionsFragment : Fragment() {
 
-    //TODO: Declare ViewModel
-    private val viewModel: ElectionsViewModel by lazy {
-        ViewModelProvider(this).get(ElectionsViewModel::class.java)
-    }
+    private val viewModel: ElectionsViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,17 +21,29 @@ class ElectionsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-//        TODO: Add ViewModel values and create ViewModel
         val binding = FragmentElectionBinding.inflate(inflater)
         binding.electionViewModel = viewModel
         binding.lifecycleOwner = this
-        val adapter = ElectionListAdapter()
+        val adapter = ElectionListAdapter(ElectionListAdapter.OnClickListener { election ->
+            viewModel.navigateToVoterInfoWith(election)
+        })
+        binding.elections.adapter = adapter
 
         viewModel.upcomingElections.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
-        binding.elections.adapter = adapter
 
+        viewModel.navigateToVoterInfo.observe(viewLifecycleOwner) { election ->
+            if (election != null) {
+                findNavController().navigate(
+                    ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(
+                        election.id,
+                        election.division
+                    )
+                )
+                viewModel.navigateToVoterInfoDone()
+            }
+        }
         //TODO: Add binding values
 
         //TODO: Link elections to voter info
@@ -41,7 +51,6 @@ class ElectionsFragment : Fragment() {
         //TODO: Initiate recycler adapters
 
 
-        //TODO: Populate recycler adapters
         return binding.root
     }
 

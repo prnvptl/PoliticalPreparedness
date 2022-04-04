@@ -1,14 +1,12 @@
 package com.example.android.politicalpreparedness.data
 
-import android.util.Log
 import com.example.android.politicalpreparedness.data.database.ElectionDao
 import com.example.android.politicalpreparedness.data.network.CivicsApiService
 import com.example.android.politicalpreparedness.data.network.models.Election
+import com.example.android.politicalpreparedness.election.model.VoterInfo
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import org.json.JSONObject
-import java.lang.Exception
 
 /**
  * Concrete implementation of a data source as a db & a network source as an api.
@@ -23,10 +21,33 @@ class ElectionRepository(
     private val api: CivicsApiService,
     private val dao: ElectionDao,
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO
-): ElectionDataSource {
-    override suspend fun getUpcomingElections(): Result<List<Election>> = withContext(ioDispatcher) {
+) : ElectionDataSource {
+    override suspend fun getUpcomingElections(): Result<List<Election>> =
+        withContext(ioDispatcher) {
+            return@withContext try {
+                Result.Success(api.getUpcomingElections().elections)
+            } catch (ex: Exception) {
+                Result.Error(ex.localizedMessage)
+            }
+        }
+
+    override suspend fun getVoterInfoForElection(
+        address: String,
+        electionId: Int
+    ): Result<VoterInfo> = withContext(ioDispatcher) {
         return@withContext try {
-            Result.Success(api.getUpcomingElections().elections)
+            val response = api.getVoterInfoWithElection(address, electionId)
+            val electionAdmin = response.state?.first()?.electionAdministrationBody
+            Result.Success(
+                VoterInfo(
+                    response.election.name,
+                    electionAdmin?.ballotInfoUrl ?: "",
+                    electionAdmin?.votingLocationFinderUrl ?: "",
+                    response.election.electionDay.toString(),
+                    electionAdmin?.name ?: "",
+                    electionAdmin?.correspondenceAddress?.toFormattedString() ?: ""
+                )
+            )
         } catch (ex: Exception) {
             Result.Error(ex.localizedMessage)
         }

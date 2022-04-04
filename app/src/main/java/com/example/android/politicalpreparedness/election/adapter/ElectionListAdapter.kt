@@ -9,7 +9,7 @@ import com.example.android.politicalpreparedness.data.network.models.Election
 import com.example.android.politicalpreparedness.databinding.ElectionRowItemBinding
 
 
-class ElectionListAdapter :
+class ElectionListAdapter(private val onClickListener: OnClickListener) :
     ListAdapter<Election, ElectionListAdapter.ElectionViewHolder>(ElectionDiffCallBack) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ElectionViewHolder {
         val binding = ElectionRowItemBinding.inflate(LayoutInflater.from(parent.context))
@@ -18,6 +18,9 @@ class ElectionListAdapter :
 
     override fun onBindViewHolder(holder: ElectionViewHolder, position: Int) {
         val electionItem = getItem(position)
+        holder.itemView.setOnClickListener {
+            onClickListener.onClick(electionItem)
+        }
         holder.bind(electionItem)
     }
 
@@ -39,5 +42,9 @@ class ElectionListAdapter :
                 time.text = item.electionDay.toString()
             }
         }
+    }
+
+    class OnClickListener(private val clickListener: (election: Election) -> Unit) {
+        fun onClick(election: Election) = clickListener(election)
     }
 }
