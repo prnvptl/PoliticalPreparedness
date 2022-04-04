@@ -17,7 +17,7 @@ class VoterInfoFragment : Fragment() {
 
     private val navArgs: VoterInfoFragmentArgs by navArgs()
     private val voterInfoViewModel: VoterInfoViewModel by viewModel {
-        parametersOf(navArgs.argElectionId, navArgs.argDivision)
+        parametersOf(navArgs.election)
     }
 
     override fun onCreateView(
@@ -30,12 +30,6 @@ class VoterInfoFragment : Fragment() {
         binding.viewModel = voterInfoViewModel
         binding.lifecycleOwner = this
 
-        //TODO: Populate voter info -- hide views without provided data.
-        /**
-        Hint: You will need to ensure proper data is provided from previous fragment.
-         */
-
-
         voterInfoViewModel.urlToOpen.observe(viewLifecycleOwner) {
             if (it != null) {
                 val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(it))
@@ -43,8 +37,6 @@ class VoterInfoFragment : Fragment() {
                 voterInfoViewModel.openUrlDone()
             }
         }
-        //TODO: Handle save button UI state
-        //TODO: cont'd Handle save button clicks
 
         return binding.root
     }

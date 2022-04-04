@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.android.politicalpreparedness.databinding.FragmentElectionBinding
 import com.example.android.politicalpreparedness.election.adapter.ElectionListAdapter
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import timber.log.Timber
 
 class ElectionsFragment : Fragment() {
 
@@ -27,19 +28,25 @@ class ElectionsFragment : Fragment() {
         val adapter = ElectionListAdapter(ElectionListAdapter.OnClickListener { election ->
             viewModel.navigateToVoterInfoWith(election)
         })
+        val savedElectionsAdapter =
+            ElectionListAdapter(ElectionListAdapter.OnClickListener { election ->
+                viewModel.navigateToVoterInfoWith(election)
+            })
         binding.elections.adapter = adapter
+        binding.savedElections.adapter = savedElectionsAdapter
 
         viewModel.upcomingElections.observe(viewLifecycleOwner) {
             adapter.submitList(it)
         }
 
+        viewModel.savedElections.observe(viewLifecycleOwner) {
+            savedElectionsAdapter.submitList(it)
+        }
+
         viewModel.navigateToVoterInfo.observe(viewLifecycleOwner) { election ->
             if (election != null) {
                 findNavController().navigate(
-                    ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(
-                        election.id,
-                        election.division
-                    )
+                    ElectionsFragmentDirections.actionElectionsFragmentToVoterInfoFragment(election)
                 )
                 viewModel.navigateToVoterInfoDone()
             }

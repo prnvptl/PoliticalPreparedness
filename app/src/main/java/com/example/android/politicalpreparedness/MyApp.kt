@@ -6,7 +6,7 @@ import com.example.android.politicalpreparedness.data.database.ElectionDao
 import com.example.android.politicalpreparedness.data.database.ElectionDatabase
 import com.example.android.politicalpreparedness.data.network.CivicsApi
 import com.example.android.politicalpreparedness.data.network.CivicsApiService
-import com.example.android.politicalpreparedness.data.network.models.Division
+import com.example.android.politicalpreparedness.data.network.models.Election
 import com.example.android.politicalpreparedness.election.ElectionsViewModel
 import com.example.android.politicalpreparedness.election.VoterInfoViewModel
 import org.koin.android.ext.koin.androidContext
@@ -24,11 +24,10 @@ class MyApp : Application() {
             single<CivicsApiService> { CivicsApi.retrofitService }
             single { ElectionRepository(get(), get()) }
             viewModel { ElectionsViewModel(get()) }
-            viewModel { (electionId: Int, division: Division) ->
+            viewModel { (election: Election) ->
                 VoterInfoViewModel(
                     get(),
-                    electionId,
-                    division
+                    election
                 )
             }
         }

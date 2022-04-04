@@ -1,5 +1,6 @@
 package com.example.android.politicalpreparedness.data
 
+import androidx.lifecycle.LiveData
 import com.example.android.politicalpreparedness.data.database.ElectionDao
 import com.example.android.politicalpreparedness.data.network.CivicsApiService
 import com.example.android.politicalpreparedness.data.network.models.Election
@@ -31,9 +32,11 @@ class ElectionRepository(
             }
         }
 
+    override fun getSavedElections(): LiveData<List<Election>> = dao.getElections()
+
     override suspend fun getVoterInfoForElection(
         address: String,
-        electionId: Int
+        electionId: Long
     ): Result<VoterInfo> = withContext(ioDispatcher) {
         return@withContext try {
             val response = api.getVoterInfoWithElection(address, electionId)
@@ -52,4 +55,17 @@ class ElectionRepository(
             Result.Error(ex.localizedMessage)
         }
     }
+
+    override suspend fun followElection(election: Election) = withContext(ioDispatcher) {
+        dao.insertElection(election)
+    }
+
+    override suspend fun getElectionById(id: Long): Election? = withContext(ioDispatcher) {
+        return@withContext dao.getElectionById(id)
+    }
+
+    override suspend fun unfollowElection(eleciton: Election) = withContext(ioDispatcher) {
+        return@withContext dao.deleteElection(eleciton)
+    }
+
 }

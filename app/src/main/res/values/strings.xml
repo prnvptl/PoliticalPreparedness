@@ -9,6 +9,7 @@
     <string name="voting_locations"><u>Voting Locations</u></string>
     <string name="ballot_information"><u>Ballot Information</u></string>
     <string name="follow_election">Follow Election</string>
+    <string name="unfollow_election">Unfollow Election</string>
     <!-- TODO: Add necessary string values -->
 
 </resources>
