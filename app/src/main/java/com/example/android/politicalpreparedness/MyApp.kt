@@ -2,6 +2,7 @@ package com.example.android.politicalpreparedness
 
 import android.app.Application
 import com.example.android.politicalpreparedness.data.ElectionRepository
+import com.example.android.politicalpreparedness.data.RepresentativeRepository
 import com.example.android.politicalpreparedness.data.database.ElectionDao
 import com.example.android.politicalpreparedness.data.database.ElectionDatabase
 import com.example.android.politicalpreparedness.data.network.CivicsApi
@@ -9,6 +10,7 @@ import com.example.android.politicalpreparedness.data.network.CivicsApiService
 import com.example.android.politicalpreparedness.data.network.models.Election
 import com.example.android.politicalpreparedness.election.ElectionsViewModel
 import com.example.android.politicalpreparedness.election.VoterInfoViewModel
+import com.example.android.politicalpreparedness.representative.RepresentativeViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -23,6 +25,7 @@ class MyApp : Application() {
             single<ElectionDao> { ElectionDatabase.getInstance(get()).electionDao }
             single<CivicsApiService> { CivicsApi.retrofitService }
             single { ElectionRepository(get(), get()) }
+            single { RepresentativeRepository(get()) }
             viewModel { ElectionsViewModel(get()) }
             viewModel { (election: Election) ->
                 VoterInfoViewModel(
@@ -30,6 +33,7 @@ class MyApp : Application() {
                     election
                 )
             }
+            viewModel { RepresentativeViewModel(get()) }
         }
         startKoin {
             androidLogger()

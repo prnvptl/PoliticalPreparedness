@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Describe the animation for activity_step3.xml -->
+<MotionScene xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Transition
+        app:constraintSetStart="@id/start"
+        app:constraintSetEnd="@id/end"
+        app:duration="500">
+        <OnSwipe
+            app:touchAnchorId="@+id/representativesList"
+            app:touchAnchorSide="top"
+            app:dragDirection="dragUp" />
+    </Transition>
+    <ConstraintSet
+        android:id="@+id/start"
+        />
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/collapsable_form"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+    </ConstraintSet>
+</MotionScene>
