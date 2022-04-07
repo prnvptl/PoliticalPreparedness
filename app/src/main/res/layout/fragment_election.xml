@@ -39,7 +39,6 @@
             android:paddingEnd="@dimen/mini_half_padding"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constrainedHeight="true"
-            app:layout_constraintBottom_toTopOf="@+id/half_screen_guideline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/elections_text_view" />
 
