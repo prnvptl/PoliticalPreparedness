@@ -11,7 +11,7 @@ MVVM + ViewModel + LiveData + Data Binding + Room Database + Koin (dependency in
 * [Glide](https://bumptech.github.io/glide/) to load and cache images by URL.
 * [Room](https://developer.android.com/training/data-storage/room) for local database storage.
 * [Koin](https://insert-koin.io/) a pragmatic lightweight dependency injection framework for Kotlin
-* [Constraint Layout & Motion Layout]
+* [Motion Layout](https://developer.android.com/training/constraint-layout/motionlayout) to create animations and motion
  
 It leverages the following components from the Jetpack library:
 
