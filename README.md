@@ -83,4 +83,4 @@ To get started with this project, simply pull the repository and import the proj
   - Behaviors are accessed only after permissions are granted.
  
 ## Report Issues
-Notice any issues with a repository? Please file a github issue in the repository.
+Notice any issues with a repository? Please file a github issue in the repository!
