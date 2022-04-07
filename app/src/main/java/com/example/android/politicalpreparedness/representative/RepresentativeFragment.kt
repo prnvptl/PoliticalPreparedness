@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.observe
@@ -21,6 +22,7 @@ import com.example.android.politicalpreparedness.data.network.models.Address
 import com.example.android.politicalpreparedness.databinding.FragmentRepresentativeBinding
 import com.example.android.politicalpreparedness.representative.adapter.RepresentativeListAdapter
 import com.example.android.politicalpreparedness.representative.adapter.setNewValue
+import com.example.android.politicalpreparedness.representative.model.Representative
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.tasks.OnCompleteListener
@@ -28,6 +30,7 @@ import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class DetailFragment : Fragment() {
@@ -38,9 +41,13 @@ class DetailFragment : Fragment() {
 
     }
 
+    private val ANIMATE_STATE_KEY = "ANIMATE_STATE"
     private val mViewModel: RepresentativeViewModel by viewModel()
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private lateinit var mBinding: FragmentRepresentativeBinding
+
+
+    private var savedRepresentativesListKey = "REPRESENTATIVE_LIST"
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,7 +89,24 @@ class DetailFragment : Fragment() {
             getMyLocationWithPermissions()
         }
 
+        if(savedInstanceState != null) {
+            mBinding.motionLayout.transitionToState(savedInstanceState.getInt(ANIMATE_STATE_KEY))
+            val savedList = savedInstanceState.getParcelableArrayList<Representative>(savedRepresentativesListKey)
+            if(savedList != null) {
+                mViewModel.setMyRepresentativesList(savedList)
+            }
+        }
         return mBinding.root
+    }
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putInt(ANIMATE_STATE_KEY, mBinding.motionLayout.currentState)
+        if(mViewModel.myRepresentatives.value != null) {
+            outState.putParcelableArrayList(savedRepresentativesListKey, ArrayList(mViewModel.myRepresentatives.value))
+        }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
