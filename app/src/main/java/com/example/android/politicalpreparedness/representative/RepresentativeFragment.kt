@@ -33,13 +33,11 @@ import java.util.*
 class DetailFragment : Fragment() {
 
     companion object {
-        //TODO: Add Constant for Location request
         private const val REQUEST_LOCATION_PERMISSION = 1
         private const val REQUEST_TURN_DEVICE_LOCATION_ON = 1002
 
     }
 
-    //TODO: Declare ViewModel
     private val mViewModel: RepresentativeViewModel by viewModel()
     private lateinit var mFusedLocationClient: FusedLocationProviderClient
     private lateinit var mBinding: FragmentRepresentativeBinding
@@ -70,7 +68,6 @@ class DetailFragment : Fragment() {
             }
         }
 
-        //TODO: Establish button listeners for field and location search
         mBinding.buttonSearch.setOnClickListener {
             mViewModel.fetchMyRepresentativesByFields(
                 mBinding.addressLine1.text.toString(),
@@ -103,9 +100,6 @@ class DetailFragment : Fragment() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        //TODO: Handle location permission result to get location on permission granted
-        // Check if location permissions are granted and if so enable the
-        // location data layer.
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.isNotEmpty() && (grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
                 getLocation()
@@ -153,7 +147,6 @@ class DetailFragment : Fragment() {
     }
 
     private fun isPermissionGranted(): Boolean {
-        //TODO: Check if permission is already granted and return (true = granted, false = denied/other)
         return ContextCompat.checkSelfPermission(
             requireContext(),
             Manifest.permission.ACCESS_FINE_LOCATION
@@ -166,8 +159,8 @@ class DetailFragment : Fragment() {
     }
 
     private fun getLocation() {
-        //TODO: Get location from LocationServices
-        //TODO: The geoCodeLocation method is a helper function to change the lat/long location to a human readable street address
+        //Get location from LocationServices
+        //The geoCodeLocation method is a helper function to change the lat/long location to a human readable street address
         // getting last
         // location from
         // FusedLocationClient

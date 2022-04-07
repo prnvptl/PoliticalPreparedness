@@ -19,6 +19,4 @@
     <string name="location_required_error">Location services must be enabled to use the app</string>
     <string name="settings">Settings</string>
 
-    <!-- TODO: Add necessary string values -->
-
 </resources>
