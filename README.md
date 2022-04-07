@@ -4,7 +4,7 @@ PolitcalPreparedness is an example application built to demonstrate core Android
 
 This app demonstrates the following views and techniques:
 
-MVVM + ViewModel + LiveData + Data Binding + Room Database + Koin (dependency injection)
+MVVM (repository pattern) + ViewModel + LiveData + Data Binding + Room Database + Koin (dependency injection)
 
 * [Retrofit](https://square.github.io/retrofit/) to make api calls to an HTTP web service.
 * [Moshi](https://github.com/square/moshi) which handles the deserialization of the returned JSON to Kotlin data objects. 
