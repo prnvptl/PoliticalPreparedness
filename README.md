@@ -26,7 +26,7 @@ To get started with this project, simply pull the repository and import the proj
 
 * NOTE: In order for this project to pull data, you will need to add your API Key to the project as a value in the CivicsHttpClient. You can generate an API Key from the [Google Developers Console](https://console.developers.google.com/)
 
-#### Android UI/UX
+## Android UI/UX
 - Build a navigable interface consisting of multiple screens of functionality and data: 
   + Application includes at least three screens with distinct features using either the Android Navigation Controller or Explicit Intents.
   + The Navigation Controller is used for Fragment-based navigation and intents are utilized for Activity-based navigation.
@@ -41,7 +41,7 @@ To get started with this project, simply pull the repository and import the proj
   - *MotionLayout* behaviors are defined in a *MotionScene* using one or more *Transition* nodes and *ConstraintSet* blocks.
   - *Constraints* are defined within the scenes and house all layout params for the animation.
 
-#### Local and Network data
+## Local and Network data
 
 - Connect to and consume data from a remote data source such as a RESTful API.
   - The Application connects to at least 1 external data source using **Retrofit** or other appropriate library/component and retrieves data for use within the application.
@@ -57,7 +57,7 @@ To get started with this project, simply pull the repository and import the proj
   - Data storage operations are performed on the appropriate threads as to not stall the UI thread.
   - Data is structured with appropriate data types and scope as required by application functionality.
 
-#### Android system and hardware integration
+## Android system and hardware integration
 
 - Architect application functionality using *MVVM*.
   - Application separates responsibilities amongst classes and structures using the MVVM Pattern:
