@@ -10,8 +10,8 @@ MVVM + ViewModel + LiveData + Data Binding + Room Database + Koin (dependency in
 * [Moshi](https://github.com/square/moshi) which handles the deserialization of the returned JSON to Kotlin data objects. 
 * [Glide](https://bumptech.github.io/glide/) to load and cache images by URL.
 * [Room](https://developer.android.com/training/data-storage/room) for local database storage.
+* [Koin - A pragmatic lightweight dependency injection framework for Kotlin] (https://insert-koin.io/)
 * [Constraint Layout & Motion Layout]
-* [Koin - A pragmatic lightweight dependency injection framework for Kotlin]
  
 It leverages the following components from the Jetpack library:
 
