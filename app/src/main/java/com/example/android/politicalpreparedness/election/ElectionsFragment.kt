@@ -51,16 +51,7 @@ class ElectionsFragment : Fragment() {
                 viewModel.navigateToVoterInfoDone()
             }
         }
-        //TODO: Add binding values
-
-        //TODO: Link elections to voter info
-
-        //TODO: Initiate recycler adapters
-
-
         return binding.root
     }
-
-    //TODO: Refresh adapters when fragment loads
 
 }

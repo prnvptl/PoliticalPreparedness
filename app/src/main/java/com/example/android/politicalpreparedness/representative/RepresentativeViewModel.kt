@@ -14,7 +14,6 @@ class RepresentativeViewModel(
     private val representativeRepository: RepresentativeRepository
 ) : ViewModel() {
 
-    //TODO: Establish live data for and address
     private val _myRepresentatives = MutableLiveData<List<Representative>>()
     val myRepresentatives: LiveData<List<Representative>> get() = _myRepresentatives
 
@@ -48,9 +47,7 @@ class RepresentativeViewModel(
 
      */
 
-    //TODO: Create function get address from geo location
 
-    //TODO: Create function to get address from individual fields
     fun fetchMyRepresentativesByFields(
         address1: String,
         address2: String,

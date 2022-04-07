@@ -9,7 +9,6 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <!-- TODO: Add necessary styles -->
     <style name="StandardButton" parent="TextAppearance.AppCompat.Button">
         <item name="android:backgroundTint">@color/colorPrimary</item>
         <item name="android:textColor">@color/white</item>

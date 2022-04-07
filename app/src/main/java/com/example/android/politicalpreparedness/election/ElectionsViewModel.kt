@@ -9,7 +9,6 @@ import com.example.android.politicalpreparedness.data.Result
 import com.example.android.politicalpreparedness.data.network.models.Election
 import kotlinx.coroutines.launch
 
-//TODO: Construct ViewModel and provide election datasource
 class ElectionsViewModel(
     private val electionsRepository: ElectionRepository
 ) : ViewModel() {
@@ -36,7 +35,7 @@ class ElectionsViewModel(
                     _upcomingElections.value = elections
                 }
                 is Result.Error -> {
-                    // TODO: Do something with the error
+
                 }
             }
         }
